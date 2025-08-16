@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Voting Dashboard - Secure Voting System</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <script src="{{ url_for('static', filename='js/no_cache.js') }}"></script>
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <div class="dashboard-header">
+        <div>
+          <h1>Voting Dashboard</h1>
+          <p class="user-info">
+            Welcome, {{ user_fullname }}! ({{ user_matric_no }})
+          </p>
+        </div>
+        <p><a href="{{ url_for('logout') }}" class="logout-link">Logout</a></p>
+      </div>
+
+      {% if user_has_voted %}
+      <div class="already-voted-message">
+        <p>You have already cast your vote. Thank you!</p>
+      </div>
+      <p><a href="{{ url_for('show_results') }}" class="vote-button" style="text-decoration: none;">View Live Results</a></p>
+      {% else %}
+      <h2>Vote for the President</h2>
+      <ul class="candidate-list">
+        {% for candidate in candidates %}
+        <li class="candidate-item">
+          <span>{{ candidate.fullname }} ({{ candidate.position }})</span>
+          <form action="{{ url_for('confirm_vote') }}" method="post">
+            <input
+              type="hidden"
+              name="candidate_id"
+              value="{{ candidate.id }}"
+            />
+            <button type="submit" class="vote-button">Vote</button>
+          </form>
+        </li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </body>
+</html>

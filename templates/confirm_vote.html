@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Confirm Your Vote</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Confirm Your Vote</h1>
+      <p class="subtitle">
+        Please review your selection before casting your vote.
+      </p>
+
+      <div class="confirmation-box">
+        <h3>You are about to vote for:</h3>
+        <h2>{{ candidate.fullname }}</h2>
+        <p>{{ candidate.position }}</p>
+      </div>
+
+      <form action="{{ url_for('vote') }}" method="post">
+        <input type="hidden" name="candidate_id" value="{{ candidate.id }}" />
+        <button type="submit" class="vote-button">Confirm & Cast Vote</button>
+      </form>
+
+      <a href="{{ url_for('dashboard') }}" class="back-link"
+        >Change Selection</a
+      >
+    </div>
+
+    <style>
+      .confirmation-box {
+        background-color: var(--secondary-color);
+        padding: 2rem;
+        border-radius: 8px;
+        margin-bottom: 2rem;
+        text-align: center;
+      }
+      .confirmation-box h3 {
+        color: var(--subtle-text);
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+      .confirmation-box h2 {
+        color: var(--text-color);
+        font-size: 2rem;
+        margin-top: 0;
+        margin-bottom: 0.5rem;
+      }
+      .confirmation-box p {
+        font-size: 1.2rem;
+        margin-top: 0;
+        color: var(--primary-color);
+      }
+      .back-link {
+        display: block;
+        margin-top: 1rem;
+        color: var(--subtle-text);
+        text-decoration: none;
+        font-size: 0.9rem;
+      }
+    </style>
+  </body>
+</html>

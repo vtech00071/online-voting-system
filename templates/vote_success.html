@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote Successful</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        .success-box {
+            text-align: center;
+            padding: 3rem;
+            background-color: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        .success-box h1 {
+            color: var(--success-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .success-box p {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-bottom: 2rem;
+        }
+        .success-box .btn-group a {
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+        .success-box .btn-group a:hover {
+            transform: translateY(-2px);
+        }
+        .btn-home {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+        .btn-results {
+            background-color: #2c3e50;
+            color: var(--white);
+        }
+    </style>
+</head>
+<body>
+    <div class="success-box">
+        <h1>Vote Cast Successfully! 🎉</h1>
+        <p>Thank you for participating in the election.</p>
+        <div class="btn-group">
+            <a href="{{ url_for('show_results') }}" class="btn-results">View Live Results</a>
+            <a href="{{ url_for('logout') }}" class="btn-home" style="margin-left: 1rem;">Logout</a>
+        </div>
+    </div>
+</body>
+</html>
