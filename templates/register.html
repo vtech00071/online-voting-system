@@ -3,37 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register - Secure Voting System</title>
+    <title>Register - BOUSTI Voting System</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* New styles for branding */
+        .header-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header-logo img {
+            max-width: 120px;
+            height: auto;
+        }
+        /* The Modal (background) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4);
+        }
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            text-align: center;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        }
+        /* The Close Button */
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close-btn:hover,
+        .close-btn:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>Student Registration</h1>
-        <p class="subtitle">Create a new account to cast your vote.</p>
-
+        <div class="header-logo">
+            <img src="{{ url_for('static', filename='images/school_logo.png') }}" alt="School Logo">
+        </div>
+        <h1>Register for Vote</h1>
+        <p class="subtitle">Bamidele Olumilua University of Education, Science and Technology</p>
         {% if error %}
-        <p class="error-message">{{ error }}</p>
+            <div class="error-message">{{ error }}</div>
         {% endif %}
-
         <form action="{{ url_for('register') }}" method="post">
             <div class="input-group">
-                <label for="matric_no">Matric No:</label>
+                <label for="matric_no">Matric Number</label>
                 <input type="text" id="matric_no" name="matric_no" required>
             </div>
-
             <div class="input-group">
-                <label for="fullname">Full Name:</label>
+                <label for="fullname">Full Name</label>
                 <input type="text" id="fullname" name="fullname" required>
             </div>
-
             <div class="input-group">
-                <label for="password">Password:</label>
+                <label for="email">School Email</label>
+                <input type="text" id="email" name="email" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
                 <input type="password" id="password" name="password" required>
             </div>
-
             <button type="submit">Register</button>
         </form>
         <p>Already have an account? <a href="{{ url_for('home') }}">Login here</a></p>
     </div>
+
+    <div id="myModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <p>You are not a member of this university. You cannot register.</p>
+        </div>
+    </div>
+    
+    <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close-btn")[0];
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+            modal.style.display = "none";
+        }
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+        // This function will be called by Flask to show the modal
+        function showModal() {
+            modal.style.display = "block";
+        }
+    </script>
 </body>
 </html>
