@@ -1,2 +1,5 @@
 Flask
+Flask-Mail
 gunicorn
+itsdangerous
+werkzeug
